@@ -58,7 +58,7 @@ def to_markdown(text):
   return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
 
 ##########################################
-# --- Agente 1: Buscador de conteúdo --- #
+# --- Agente 1: Investigador Curioso --- #
 ##########################################
 def agente_buscador(topico, data_de_hoje):
 
@@ -66,9 +66,9 @@ def agente_buscador(topico, data_de_hoje):
         name="agente_buscador",
         model="gemini-2.0-flash",
         instruction="""
-        Você é um assistente de pesquisa. A sua tarefa é usar a ferramenta de busca do google (google_search)
+        Você é um assistente de pesquisa. A sua tarefa é usar a ferramenta de busca do Google (google_search)
         para encontrar informações relevantes sobre o tópico abaixo.
-        Foque em no máximo 5 lançamentos relevantes, com base na qualidade como o topico retratado e o local de onde a informação foi provida.
+        Foque em no máximo 5 lançamentos relevantes, com base na qualidade, como o tópico retratado e o local de onde a informação foi provida.
         Se um tema tiver poucas notícias ou reaçõesReentrant, é possível que ele não seja tão relevante assim
         e pode ser substituído por outro que tenha mais.
         
@@ -83,7 +83,7 @@ def agente_buscador(topico, data_de_hoje):
     return lancamentos
 
 ################################################
-# --- Agente 2: Planejador de conteudo --- #
+# --- Agente 2: Arquiteto do Saber --- #
 ################################################
 def agente_planejador(topico, lancamentos_buscados):
     planejador = Agent(
@@ -110,7 +110,7 @@ def agente_planejador(topico, lancamentos_buscados):
     return plano_do_post
 
 ######################################
-# --- Agente 3: Redator do Post --- #
+# --- Agente 3: Mestre da Explicação --- #
 ######################################
 def agente_redator(topico, plano_de_post):
     redator = Agent(
@@ -118,10 +118,10 @@ def agente_redator(topico, plano_de_post):
         model="gemini-2.0-flash",
         instruction="""
             Você é um redator criativo especializado na elaboração de textos educativos.
-            Você escreve resumos de conteudo com o objetivo de esclarecer topicos de estudo.
+            Você escreve resumos de conteúdo visando esclarecer tópicos de estudo.
             Utilize o tema fornecido no plano de post e os pontos mais relevantes fornecidos e, com base nisso,
-            escreva uma dissertação sobre o tema de que seja engajadora, sucinta, informativa, com linguagem clara, 
-            e de forma que uma pessoa leiga sobre o tema consiga compreende-la.
+            escreva uma dissertação sobre o tema que seja engajadora, sucinta, informativa, com linguagem clara 
+            e de forma que uma pessoa leiga sobre o tema consiga compreendê-la.
             Ao final da dissertação, coloque as 5 sugestões de temas relacionados que poderiam ser utilizados para continuar o aprendizado.
             O texto deve ser escrito em português brasileiro.
             """,
@@ -133,14 +133,14 @@ def agente_redator(topico, plano_de_post):
     return rascunho
 
 ##########################################
-# --- Agente 4: Revisor de Qualidade --- #
+# --- Agente 4: Guardião da Didática --- #
 ##########################################
 def agente_revisor(topico, rascunho_gerado):
     revisor = Agent(
         name="agente_revisor",
         model="gemini-2.0-flash",
         instruction="""
-            Você é um Editor e Revisor de Conteúdo meticuloso, especializado em didática.
+            Você é um editor e revisor de conteúdo meticuloso, especializado em didática.
             Revise o rascunho de post de didática abaixo sobre o tópico indicado, verificando clareza, concisão, correção e tom.
             Se o rascunho estiver bom, responda apenas 'O rascunho está ótimo e pronto para usar!'.
             Caso haja problemas, aponte-os e sugira melhorias.
