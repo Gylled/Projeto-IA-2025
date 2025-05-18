@@ -25,6 +25,9 @@ Prepare-se para uma nova forma de explorar o conhecimento! Dê um tema aos nosso
 --------------------------------------
 
 Planos futuros
+
 Adicionar agente 5 encarregado de elaborar perguntas sobre o tema
+
 Adicionar agente 6 para corrigir a resposta dada as perguntas
+
 Criar um sistema de looping onde o aluno possa continuar no "Rabbit hole" de conhecimento
